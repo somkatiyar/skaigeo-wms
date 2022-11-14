@@ -1,0 +1,211 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/arya-purple/theme.css';
+@import '~primeng/resources/primeng.min.css';
+
+$primary: #ff712d !important;
+$secondary: #6D6E70 !important;
+body{
+    background-color: white;
+    color: black;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.selectHead[_ngcontent-pho-c59] {
+    margin-left: 5px !important;
+    font-size: 9px !important;
+    text-transform: uppercase;
+}
+.purchase-api[_ngcontent-pho-c59] {
+    font-size: 11px !important;
+    font-weight: bold !important;
+    margin-top: -6px !important;
+}
+.p-dropdown {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.p-dropdown {
+    background: #f8f9fa !important;
+    color: #000 !important;
+    font-size: 10px !important;
+    align-items: center !important;
+}
+:host ::ng-deep .p-dropdown {
+    width: 7.5rem;
+    height: 1.9rem;
+  }
+p-dropdown .p-dropdown-trigger {
+    color: #ff712d !important;
+    font-size: 10px !important;
+}
+p-dropdown .p-dropdown-label {
+    color: #000 !important;
+    border: 0 none;
+    font-size: 12px;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+    color: #fff !important;
+    background: #ff712d !important;
+}
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    color: #121212 !important;
+}
+.p-dropdown-panel {
+    background: #f8f9fa !important;
+}
+
+//Color Palette
+$pinkish-orange: #ff712d;
+$pale-grey: #e6eaee;
+$dark-orange: #fe7035;
+$light-orange: #ff9e5e;
+$dark-orange-text:#ff7136;
+$dark-text: #2e384d;
+$light-text: #b0bac9;
+$dark-grey: #8d92a3;
+$light-grey: #bfc5d2;
+$light-light-grey: #fcfcfd;
+$dark-blue :#485465;
+$dark-border: #eaedf3;
+$light-light-white: #fdfdfd;
+$light-white: #f2f4f6;
+$panel-heading-text: #282f36;
+
+//fonts
+$font-barlow: 'Barlow', sans-serif;
+$font-rubik: 'Rubik', sans-serif;
+$font-roboto: 'Roboto', sans-serif;
+$font-lato: 'Lato', sans-serif;
+$menu-icon-fontSize: 24px;
+
+$primary-color: #333;
+$primary-txt-color: #000;
+$border-color-light-grey: #e3e6de;
+
+$text-white: #fff;
+$border-white: #fff;
+$background-white: #fff;
+
+
+//placeholder text
+$place-holder-text-color: #6c757d;
+$place-holder-font: $font-barlow;
+$place-holder-font-size: 12px;
+
+$input-read-only: #b0bac9;
+$input-font-size: 0.875rem;
+
+//error message
+$alert-text-color: red;
+$alert-text-size: 0.7rem;
+
+//borders
+$border-white: #ffffff;
+$border-orange: #fe7035;
+$panel-border-color: #e6eaee;
+
+//multi select option
+$multi-select-border: #d8dce6;
+$multi-select-label: #485465;
+
+//dropdown
+$dropdown-highlight: #ff7136;
+
+//check box
+$chk-box-active-border: #ff7136;
+$chk-box-active-bg-color: #ff7136;
+$chk-box-active-tick-color: #ffffff;
+$chk-box-disabled-border: #ff7136;
+$chk-box-disabled-bg-color: #ff7136;
+$chkbox-label: #8d92a3;
+$checkbox-panel-chkbox-label: #485465;
+
+//tabs
+$tab-bg: #ffffff;
+$tab-border: #e6eaee;
+$tab-text: #2e2e2e;
+$tab-active-border: #ff7136;
+$tab-active-bg: #ff7136;
+$tab-hover-bg: #ededed;
+$tab-sm-content-bg: #f1f2f4;
+
+//tables
+$table-heading-text: #485465;
+$table-text: #485465;
+$table-sm-bg: #ffffff;
+$table-sm-border: #f1f2f4;
+$table-border-color: #e8eaed;
+
+
+$table-fixed-header-left-bg: #ffffff;
+$table-fix-h-l-tbody-text: #454951;
+$table-fix-h-l-tbody-th-text: #858d98;
+$table-fix-h-l-tbody-tr-bor-color: #e8eaed;
+$table-fix-h-l-thead-th-text: #858d98;
+$table-fix-h-l-thead-th-fc-text: #454951;
+
+//buttons
+$btn-with-icon-text-border: #d8dce6;
+$btn-with-icon-text-bg: #ffffff;
+$btn-with-icon-text-bgHover: #d8dce6;
+$btn-with-icon-text-color: #485465;
+
+//group buttons
+$btn-group-active-bg:  transparent;
+$btn-group-active-border: #ff7136;
+$btn-group-hover-bg:  #ededed;
+
+//header
+$header-toolbar-bg: #ffffff;
+$header-toolbar-border: #e6eaee;
+$menu-btn-bg: #000000;
+$sub-heading-text-color: #485465;
+
+//side nave
+$nav-icon: $light-grey;
+$active-link: #ffffff;
+$active-link-bg: 127deg, #fe7035, #ff9e5e;
+
+//Risk Level
+$very-high-risk: #dc395f;
+$high-risk: #ff7052;
+$moderate-risk: #ffc800;
+$low-risk: #3fb6dc;
+$very-low-risk: #2dc76d;
+
+//template
+$middle-container-bg-border: #e6eaee;
+$middle-container-bg: #ffffff;
+
+
+//portfolio & pricing
+$heading-text-color: #485465;
+$filter-text-color: #8d92a3;
+$card-title-color: #8d92a3;
+
+//farmers profile
+$map-bg: #417505;
+$weather-details-text: #737780;
+$response-data: rgba(40, 47, 54, 0.5);
+
+$footer-text-color: #b7bfcc;
+
+//Z-index
+$skymetWeather-logo-zIndex: 1;
+$header-toolbar-zIndex: 2;
+
+//radio buttons
+//check box
+$radio-box-active-border: #ff7136;
+$radio-box-active-bg-color: #ff7136;
+$radio-box-active-tick-color: #ffffff;
+$radio-box-disabled-border: #ff7136;
+$radio-box-disabled-bg-color: #ff7136;
+
+
+

@@ -1,0 +1,84 @@
+<div class="containerr">
+    <span class="logo"><img src="assets/img/sAIgeologo.svg" alt="Skymet logo" height="24"></span>
+    <span class="poweredby"> <label>Powered By: </label> <img src="assets/img/skymetlogo.png" alt="Skymet logo"
+        height="20">
+</span>
+</div>
+
+<div class=" bg-color" id="demo-filter">
+    <div class="middle-container">
+        <!-- <div class="show-mobile"><span (click)="ToggleButton()"><i class="fa fa-search" aria-hidden="true"></i> Show
+                Search Filter </span></div> -->
+
+        <div class="float-clear"></div>
+
+        <!-- <div id="searchblock" class="filter-container" mode="side" [ngClass]="show_filter ? 'filter-hiddenTrue' : 'filter-hiddenFalse'"> -->
+
+            <div class="clearfix" style="flex: 7">
+               
+                <div class="multi-select-panel">
+               <button class="btn btn-sm button-color" style="font-size: 12px;">
+                <a class="updateMap text-decoration-none text-danger">RESET &nbsp;&nbsp;
+                    <img src="assets/img/redo-solid.svg" height="12px" />
+                </a>
+               </button>
+                    <!-- <a class="updateMap" (click)="initialMapLoad()">RESET &nbsp;&nbsp;
+                            <img src="assets/img/redo-solid.svg" height="15px" />
+                        </a> &nbsp;&nbsp;&nbsp; -->
+
+                    <span class="selectHead">Data Set:</span>
+
+                    <!--[(options)]="layers"  (onChange)="layerManager()" [(ngModel)]="selectedLayers" -->
+                    <p-dropdown 
+                    [options]="layers" [(ngModel)]="selectedLayer" 
+                      optionLabel="name" optionValue="value" class="dropdown-panel select location locationW selectactive">
+                    </p-dropdown>
+
+                    <span class="selectHead selectHeadmargin">From:</span>
+                    <p-dropdown [options]="dateData" class="dropdown-panel select dateW"  [(ngModel)]="selectedFromDate" data-tooltip="First fortnight">
+                    </p-dropdown>
+
+                    <span class="selectHead">To:</span>
+                    <p-dropdown [options]="dateData" class="dropdown-panel select dateW"  [(ngModel)]="selectedToDate" data-tooltip="Second fortnight">
+                    </p-dropdown>
+
+                    <span class="selectHead selectHeadmargin">State:</span>
+                    <p-dropdown [options]="filteredStates"  (onChange)="onStateChange()" class="dropdown-panel select location" [(ngModel)]="selectedState">
+                    </p-dropdown>
+
+                    <span class="selectHead ">District:</span>
+                    <p-dropdown [options]="districts" (onChange)="onDistrictChange()" class="dropdown-panel select location" [(ngModel)]="selectedDistrict">
+                    </p-dropdown>
+
+                    <span class="selectHead">Sub District:</span>
+                    <p-dropdown [options]="subDistricts"  class="dropdown-panel select location" [(ngModel)]="selectedSubDist">
+                    </p-dropdown>
+                    
+                    <a class=" btn btn-danger updateMap purchaseAPIS purchase-api  text-white" data-toggle="modal" data-target="#myModal">Purchase APIS &nbsp;
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
+
+                    <!-- <label class="updateMap graphbtn" for="linegraph" *ngIf="['Soil Moisture','Cropping Potential','Greenness Index','Irrigation potential','CCE Points','Cat Event Risk Rating','AI Crop Classification'].indexOf(selectedLayers.value) < 0 && !isTowers">line graph 
+                        <input type="checkbox" style="display:none" id="linegraph" [(ngModel)]="isLineGraphshow" name="isLineGraphshow" (change)="toggleLineChart()">
+                           
+                        <img alt="Skymet logo" height="15" src="assets/img/linegraph.svg">
+                        
+                     </label> -->
+
+                    <span class="vl"></span>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+</div>
+
+<app-google-map></app-google-map>
+
+<app-google-map
+[selectedLayer]="selectedLayer"
+[selectedFromDate]="selectedFromDate"
+[selectedToDate]="selectedToDate"
+[selectedState]="selectedState"
+[selectedSubDist]="selectedSubDist"
+[selectedDistrict]="selectedDistrict"></app-google-map>
+

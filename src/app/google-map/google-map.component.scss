@@ -1,0 +1,206 @@
+@import "../../styles.scss";
+.boyttomSlider {
+    position: absolute;
+    background-color: #000000;
+    z-index: 99999999;
+    width: 100%;
+    opacity: 1;
+    bottom: 0;
+
+    .slidericon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff !important;
+        font-size: 18px;
+    }
+    .sliderBody {
+        .sliderItem {
+            &:last-child {
+                .sDate {
+                    left: unset;
+                    right: 0;
+                }
+            }
+           
+        }
+    }
+
+    .vline{
+        height: 7px;
+        position: relative;
+        
+    }
+    .sDate {
+        position: absolute;
+        top: -22px;
+        left: 0;
+        font-size: 12px;
+        
+        
+
+    }
+    .sActive {
+        &::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: -9px;
+            top: -5px;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 14px solid $primary;
+            z-index: 1;
+        }
+    }
+}
+
+.legend {
+    position: absolute;
+    z-index: 999999;
+    background-color: #fff;
+    right: 10px;
+    top: 70px;
+    width: 200px;
+    padding: 0;
+    border-radius: 5px;
+
+
+    ul, .custome-legend {
+        font-size: 1.0em;
+        font-weight: bold;
+        padding: 12px;
+        margin-bottom: 0 !important;
+        list-style: none;
+
+        li {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            .legend-color {
+                width: 15px;
+                height: 15px;
+                margin-right: 5px;
+            }
+            .legend-name {
+                color: $secondary;
+            }
+        }
+    }
+}
+
+
+.layer-legend {
+    position: absolute;
+    right: 12px;
+    bottom: 6%;
+    border-radius: 5px;
+    padding: 10px;
+    width: 220px;
+    z-index: 9999;
+    background-color: #fff;
+
+    ul, .custome-legend {
+        position: relative;
+        font-size: 12px;
+        font-weight: 600;
+        padding-left: 0 !important;
+        margin-bottom: 0 !important;
+        list-style: none;
+
+        li {
+            margin-top: 7px;
+            display: flex;
+            align-items: center;
+            .legend-color {
+                width: 13px;
+                height: 13px;
+                margin-right: 5px;
+            }
+            .legend-name {
+                color: $secondary;
+            }
+
+        }
+        .slider-bar {
+            position: absolute;
+            top: 90px;
+            right: -62px;
+            z-index: 99999;
+            transform: rotate(270deg);
+            &::before {
+                content: "100";
+                position: absolute;
+                font-size: 14px;
+                color: #333;
+                bottom: 4px;
+                left: 125px;
+                transform: rotate(-270deg);
+            }
+
+            &::after {
+                content: "0";
+                position: absolute;
+                font-size: 14px;
+                color: #333;
+                top: -2px;
+                left: -14px;
+                transform: rotate(-270deg);
+            }
+            
+        }
+    }
+}
+.display-block{
+    display: block;
+}
+.display-none{
+    display: none;
+}
+
+.theme-active {
+    border: 3px solid #7194cc;
+}
+.theme {
+
+    position: absolute;
+    left: 11px;
+    display: flex;
+    flex-flow: row;
+    justify-content: sp;
+    width: 163px;
+    justify-content: space-evenly;
+    bottom: 70px;
+    background: #3e3a3a;
+    padding: 6px;
+    border-radius: 4px;
+    z-index: 999999;
+  }
+  
+  #gray{
+      height: 43px;
+      width: 43px;
+      cursor: pointer;
+      background-image: url('https://snazzy-maps-cdn.azureedge.net/assets/132-light-gray.png?v=20170626081135');
+      border-radius: 5px;
+  }
+  #dark{
+    height: 43px;
+      width: 43px;
+      cursor: pointer;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpSF0mu35Qd1B0XHZLLXmx5NsSZnFA10OJIA&usqp=CAU');
+      border-radius: 5px;
+  }
+
+#sanzy{
+    height: 43px;
+      width: 43px;
+      cursor: pointer;
+      background-image: url('https://snazzy-maps-cdn.azureedge.net/assets/127403-no-label-bright-colors.png?v=20171101110035');
+      border-radius: 5px;
+  }

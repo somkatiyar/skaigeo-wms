@@ -1,0 +1,519 @@
+
+
+
+<div id="map" class="position-relative" style="height: calc(100vh - 80px);">
+  
+</div>
+
+
+<div *ngIf="isSlider">
+    <div 
+
+ class="row align-item-center boyttomSlider position-absolute end-0 bottom-0 py-3 mx-2 pe-2" >
+   
+        <div class="col-auto">
+            <span class="slidericon" *ngIf="isPlay" (click)="toggleSlider()" style="cursor: pointer;"><i class="bi bi-play-fill"></i></span>
+            <span class="slidericon" *ngIf="!isPlay" (click)="toggleSlider()" style="cursor: pointer;"><i class="bi bi-pause-fill"></i></span>   
+        </div>
+   
+    <div class="col">
+        <div class="row sliderBody pe-3"> 
+             <div class="col sliderItem">
+                <div class="date-wrapper" style="display: flex;
+                justify-content: space-between;" *ngIf="sliderDateRange">
+                    <div id="firstDate" class="text-white" style="font-size: 12px;">{{sliderLayers && sliderLayers[0] && sliderLayers[0]['date']}}</div>
+                    <div id="secondDate" class="text-white" style="font-size: 12px;">{{sliderLayers && sliderLayers[26] && sliderLayers[26]['date']}}</div>
+                    <div class="position-absolute top-0 start-50 translate-middle-x">
+                        <input type="text" name="selectedSliderDate" class="bg-white text-dark mt-1 px-2" [(ngModel)]="selectedSliderDate" style="width:100px;border-radius: 5px;pointer-events: none; font-size: 12px;">
+                    </div>
+                    <div id="thirdDate" class="text-white" style="font-size: 12px;">{{sliderLayers && sliderLayers[19] && sliderLayers[19]['date']}}</div>
+                    <div id="forthDate" class="text-white" style="font-size: 12px;">{{sliderLayers && sliderLayers[sliderLayers.length-1] && sliderLayers[sliderLayers.length-1]['date']}}</div>
+                </div>
+                <div class="row align-item-center text-white">
+                    <div class="col border-top pt-1 position-relative">
+               
+                        <div class="row">
+                            <div class="col">
+                                <div class="roar" style="display:flex !important">
+                                    <div class="col vline border-start border-2 " style="cursor:pointer" 
+                                   [ngClass]="sliderTickIndex == index ? 'sActive' : ''"
+                                       *ngFor="let item of sliderLayers;let index = index" (click)="onSliderTickChange(item,index)">
+                                       <div class=""></div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="theme">
+    
+    <div id="gray" [ngClass]="selectedTheme == 0 ? 'theme-active' : ''" (click)="theameClick(0)"></div>
+    <div id="dark" [ngClass]="selectedTheme == 1 ? 'theme-active' : ''" (click)="theameClick(1)"></div>
+    <div id="sanzy" [ngClass]="selectedTheme == 2 ? 'theme-active' : ''" (click)="theameClick(2)"></div>
+
+</div>
+
+ <!-- Greenness Index layer legend  -->
+ <div class="layer-legend pb-3"
+ [ngClass]="selectedLayer == 'Greenness Layer' ? 'display-block' : 'display-none'"
+  id="legend-GreennessIndex" style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;">
+
+    <div class="tooltip2 border-bottom px-2">
+        <h3 class="fs-6"> Greenness Index </h3>
+    </div>
+
+    <ul class="custom-legend px-2 border-bottom pb-3" style="font-size: 12px;font-weight: normal; ">
+
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(17,69, 17); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 1 </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2 " style="background-color:rgb(81,117, 45); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 0.8 </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(160,173, 81); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 0.6 </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(184,161, 79); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 0.4 </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(140,85, 39); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 0.2 </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(97,21, 13); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 0 </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+
+
+    <!-- <div class="slider-bar" style="position: absolute; top: 70px; right: -43px;">
+        <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+    </div> -->
+    </ul>
+
+
+
+</div>
+
+<!-- soil  moisture layer legend  -->
+<div class="layer-legend" id="legend-SM-Normal"
+[ngClass]="selectedLayer == 'SM Normal' ? 'display-block' : 'display-none'"
+ style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;">
+
+    <div class="tooltip2 border-bottom">
+        <h2 style="font-size: 14px;">Soil Moisture</h2>
+    </div>
+
+    <div class="row align-items-center py-3 border-bottom px-2">
+        <div class="col-auto pe-0 ps-1">
+            <div class="legendcolor legendcolorHeight" style=" float: left;background-image: linear-gradient(to bottom,#0011f2, #0dff00, #f4ff00, red); width: 50px; height: 155px;"></div>
+        </div>
+        <div class="col pe-0">
+            <ul class="custom-legend fw-normal">
+                <li class="pb-2 mt-3">
+                    <span style="font-size: 12px;">100%</span>
+                </li>
+                <li class="pb-2 mt-3">
+                    <span style="font-size: 12px;">25%</span>
+                </li>
+                <li class="pb-2 mt-3">
+                    <span style="font-size: 12px;">-35%</span>
+                </li>
+                <li class="pb-0 mt-3">
+                    <span style="font-size: 12px;">-100%</span>
+                </li>
+
+                <!-- <div class="slider-bar" style="position: absolute; top: 55px; right: -43px;">
+                    <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+                </div> -->
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- Maximum Temperature layer legend  -->
+<div class="layer-legend" id="legend-TMax"
+[ngClass]="selectedLayer == 'Maximum Temperature' ? 'display-block' : 'display-none'"  style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;"   >
+
+
+    <div class="tooltip2 border-bottom">
+        <h3 style="font-size: 14px;"> Maximum Temperature Index </h3>
+    </div>
+
+
+    <ul class="custom-legend border-bottom py-3" style="font-size: 12px;font-weight: normal;">
+        <li>
+            <div class="legendcolor me-2" style="width:60px; height: 16px; background-color:rgb(192,91, 21);"></div>
+            <div class="legend-value"> 100% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="width:60px; height: 16px; background-color:rgb(206,132, 76);"></div>
+            <div class="legend-value"> 80% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="width:60px; height: 16px; background-color:rgb(216,162, 118);"></div>
+            <div class="legend-value"> 60% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="width:60px; height: 16px; background-color:rgb(226,193, 160);"></div>
+            <div class="legend-value"> 40% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="width:60px; height: 16px; background-color:rgb(236,223, 201);"></div>
+            <div class="legend-value"> 20% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="width:60px; height: 16px; background-color:rgb(246,254, 243);"></div>
+            <div class="legend-value"> 0% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+
+        <!-- <div class="slider-bar" style="position: absolute; top: 89px; right: -50px;">
+            <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+        </div> -->
+    </ul>
+
+</div>
+
+<!-- Precipitation Index layer lengend  -->
+<div class="layer-legend pb-3" 
+[ngClass]="selectedLayer == 'Precipitation Index' ? 'display-block' : 'display-none'"
+id="legend-GreennessIndex" style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;">
+
+    <div class="tooltip2 border-bottom px-2">
+        <h3 style="font-size: 14px;"> Precipitation Index </h3>
+    </div>
+
+    <ul class="custom-legend px-2 border-bottom pb-3" style="font-size: 12px;font-weight: bold; ">
+
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(54,113, 169); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 100% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2 " style="background-color:rgb(101,146, 188); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 80% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(137,170, 202); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 60% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(172,194, 215); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 40% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(207,219, 229); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 20% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(243,243, 243); width: 60px; height: 16px;"></div>
+            <div class="legend-value"> 0% </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+
+
+    <!-- <div class="slider-bar" style="position: absolute; top: 70px; right: -43px;">
+        <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+    </div> -->
+    </ul>
+
+
+
+</div>
+
+
+<!-- irrigation potential layer lengend  -->
+<div class="layer-legend pb-3" 
+[ngClass]="selectedLayer == 'Irrigation potential' ? 'display-block' : 'display-none'" id="legend-GreennessIndex" style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;">
+
+    <div class="tooltip2 border-bottom px-2">
+        <h3 style="font-size: 14px;">  Vegetation Condition Index  </h3>
+    </div>
+
+    <ul class="custom-legend px-2 border-bottom pb-3" style="font-size: 12px;font-weight: normal; ">
+
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(77,49,39); width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small">Non Agriculture</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(222,16,47); width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small"> No-Crop</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(28,9,239); width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small"> Rainfed</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(25,220,15); width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small" > Irrigated </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div style="clear:both">&nbsp;</div>
+        </li>
+        <li>
+            <div style="clear:both">&nbsp;</div>
+        </li>
+
+
+    <!-- <div class="slider-bar" style="position: absolute; top: 70px; right: -48px;">
+        <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+    </div> -->
+    </ul>
+
+</div>
+
+<!-- cce points potential layer lengend  -->
+<div class="layer-legend pb-3" 
+[ngClass]="selectedLayer == 'CCE Points' ? 'display-block' : 'display-none'" 
+ id="legend-GreennessIndex" style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;">
+
+    <ul class="custom-legend px-2 border-bottom pb-3" style="font-size: 12px;font-weight: normal; ">
+
+        <li>
+            <div class="legendcolor me-2" style="background-color:#00FF7F; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small">Masoor</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#7FFFD4; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small"> Sugarcane</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#F0E68C; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small">  Cotton </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#FF0000; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small">  Paddy </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#FFFF00; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small">  Wheat </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#2F4F4F; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small">  Bengal Gram </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#808000; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small"> Maize </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#8B4513; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small"> Groundnut </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#A0522D; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small"> Urad </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#DAA520; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small"> Mustard </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#FF8C00; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small"> Arhar (Tur) </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#FFD700; width: 50px; height: 20px;"></div>
+            <div class="legend-value text-small"> Soybean </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+
+
+
+    <!-- <div class="slider-bar" style="position: absolute; top: 140px; right: -53px;">
+        <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+    </div> -->
+    </ul>
+
+</div>
+
+<!-- Cat Event Risk Rating Index layer lengend  -->
+<div class="layer-legend pb-3" 
+[ngClass]="selectedLayer == 'Cat Event Risk Rating' ? 'display-block' : 'display-none'" 
+ id="legend-GreennessIndex" style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;">
+
+    <div class="tooltip2 border-bottom px-2">
+        <h3 style="font-size: 14px;"> Cat Event Risk Rating Index </h3>
+    </div>
+
+    <ul class="custom-legend px-2 border-bottom pb-3" style="font-size: 12px;font-weight: normal; ">
+
+        <li>
+            <div class="legendcolor me-2" style="background-color:#41A156; width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small"> No Risk </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#20BBD9; width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small"> Very Low Risk </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#63C2D3; width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small"> Low Risk </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#DFAB46; width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small" > Medium Risk </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#D29C80; width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small" > High Risk </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:#C56639; width: 20px; height: 20px;"></div>
+            <div class="legend-value text-small" > Very High Risk </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+
+<!-- 
+    <div class="slider-bar" style="position: absolute; top: 70px; right: -48px;">
+        <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+    </div> -->
+    </ul>
+
+</div>
+
+<!-- AI Crop Classification layer lengend  -->
+<div class="layer-legend pb-3" 
+[ngClass]="selectedLayer == 'AI Crop Classification' ? 'display-block' : 'display-none'"
+ id="legend-GreennessIndex" style="position: absolute; top: 30%; right: 10px; bottom: unset; width: 180px;">
+
+    <div class="tooltip2 border-bottom px-2">
+        <h3 style="font-size: 14px;"> AI Crop Classification </h3>
+    </div>
+
+    <ul class="custom-legend px-2 border-bottom pb-3" style="font-size: 12px;font-weight: normal; ">
+
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(255,255,0); width: 90px; height: 20px;"></div>
+            <div class="legend-value text-small">Wheat</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(128, 128, 0); width: 90px; height: 20px;"></div>
+            <div class="legend-value text-small"> Maize</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(127, 255, 212); width: 90px; height: 20px;"></div>
+            <div class="legend-value text-small"> Gram</div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div class="legendcolor me-2" style="background-color:rgb(255, 0, 0); width: 90px; height: 20px;"></div>
+            <div class="legend-value text-small" > Paddy </div>
+            <div class="legend-text"> </div>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <div style="clear:both">&nbsp;</div>
+        </li>
+        <li>
+            <div style="clear:both">&nbsp;</div>
+        </li>
+
+
+    <!-- <div class="slider-bar" style="position: absolute; top: 70px; right: -48px;">
+        <input type="range" (input)="changeLayerRangeMeter($event)" min="0" max="1" step="0.1" value="1" [(ngModel)]="layerOpacity" name="layerOpacity">
+    </div> -->
+    </ul>
+
+</div>
